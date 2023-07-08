@@ -645,3 +645,13 @@ table{
 .card .container {
   padding: 10px 16px;
 }
+@media screen and (max-width:786px){
+.card-container{
+  margin-top:100px;
+}
+.section{
+  padding:20px ;
+}
+.hero-heading{
+  font-size:25px;
+}}
