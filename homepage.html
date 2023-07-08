@@ -39,6 +39,70 @@
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum temporibus laudantium cumque provident, deserunt corporis asperiores assumenda rem rerum minima! Quisquam aperiam vitae nesciunt labore itaque facere omnis cumque officiis!
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum temporibus laudantium cumque provident, deserunt corporis asperiores assumenda rem rerum minima! Quisquam aperiam vitae nesciunt labore itaque facere omnis cumque officiis!
     </section>
+    <div class="search">
+            <h1>Candidate Search</h1>
+            <div id="search-form">
+                <input class="search-filters" type="text" id="jobTitleInput" placeholder="Job Title">
+                <input class="search-filters" type="text" id="locationInput" placeholder="Location">
+                <input class="search-filters" type="text" id="skillsInput" placeholder="Skills">
+                <input class="search-filters" type="text" id="experienceInput" placeholder="Experience">
+            </div>
+      </div>
+    
+      <div class="search-result" id="searchResults"></div>
+    
+      <script>
+        fetch('candidates.json')
+          .then(response => response.json())
+          .then(data => {
+            const candidates = [...data];
+    
+            function searchCandidates() {
+              const jobTitle = document.getElementById('jobTitleInput').value.toLowerCase();
+              const location = document.getElementById('locationInput').value.toLowerCase();
+              const skills = document.getElementById('skillsInput').value.toLowerCase();
+              const experience = document.getElementById('experienceInput').value.toLowerCase();
+    
+              const filteredCandidates = candidates.filter(candidate =>
+                candidate.jobTitle.toLowerCase().includes(jobTitle) &&
+                candidate.location.toLowerCase().includes(location) &&
+                candidate.skills.toLowerCase().includes(skills) &&
+                candidate.experience.toLowerCase().includes(experience)
+              );
+    
+              displayResults(filteredCandidates);
+            }
+    
+            function displayResults(results) {
+              const searchResults = document.getElementById('searchResults');
+              searchResults.innerHTML = '';
+    
+              if (results.length === 0) {
+                searchResults.innerHTML = 'No results found.';
+              } else {
+                results.forEach(candidate => {
+                  const candidateCard = document.createElement('div');
+                  candidateCard.innerHTML = `
+                    <h3>${candidate.name}</h3>
+                    <p><strong>Job Title:</strong> ${candidate.jobTitle}</p>
+                    <p><strong>Location:</strong> ${candidate.location}</p>
+                    <p><strong>Skills:</strong> ${candidate.skills}</p>
+                    <p><strong>Experience:</strong> ${candidate.experience}</p>
+                  `;
+                  searchResults.appendChild(candidateCard);
+                });
+              }
+            }
+            const searchInputs = document.querySelectorAll('input[type="text"]');
+            searchInputs.forEach(input => {
+              input.addEventListener('input', searchCandidates);
+            });
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      </script>
+      </div>
     <footer>
       <div class="footer-container">
         <div class="footer-left">

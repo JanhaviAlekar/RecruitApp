@@ -503,3 +503,28 @@ footer h4{
 .login-register a:hover {
   text-decoration: underline;
 }
+
+.search{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  padding: 40px;
+}
+.search-form{
+  padding-top: 100px;
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(4, 50px);
+  
+}
+.search-filters{
+  /* width: 100%; */
+  padding: 12px;
+  margin-bottom: 20px;
+  /* text-decoration: white; */
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
